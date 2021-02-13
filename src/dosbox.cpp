@@ -613,15 +613,20 @@ void DOSBOX_Init(void) {
 	Pstring->Set_values(oplmodes);
 	Pstring->Set_help("Type of OPL emulation. On 'auto' the mode is determined by sblaster type. All OPL modes are Adlib-compatible, except for 'cms'.");
 
-	const char* oplemus[]={ "default", "compat", "fast", "mame", 0};
+	const char* oplemus[]={ "default", "compat", "fast", "mame", "serial", 0};
 	Pstring = secprop->Add_string("oplemu",Property::Changeable::WhenIdle,"default");
 	Pstring->Set_values(oplemus);
-	Pstring->Set_help("Provider for the OPL emulation. compat might provide better quality (see oplrate as well).");
+	Pstring->Set_help("Provider for the OPL emulation. compat might provide better quality (see oplrate as well). serial uses a serial port connection to an OPL3 Duo! board (see oplserialport and oplserialbaud as well).");
 
 	Pint = secprop->Add_int("oplrate",Property::Changeable::WhenIdle,44100);
 	Pint->Set_values(oplrates);
 	Pint->Set_help("Sample rate of OPL music emulation. Use 49716 for highest quality (set the mixer rate accordingly).");
 
+	Pstring = secprop->Add_string("oplserialport", Property::Changeable::WhenIdle, "/dev/ttyACM0");
+	Pstring->Set_help("Serial port device to use for serial oplemu.");
+
+	Pint = secprop->Add_int("oplserialbaud", Property::Changeable::WhenIdle, 1000000);
+	Pint->Set_help("Baud rate to use for serial oplemu.");
 
 	secprop=control->AddSection_prop("gus",&GUS_Init,true); //done
 	Pbool = secprop->Add_bool("gus",Property::Changeable::WhenIdle,false);

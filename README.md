@@ -1,3 +1,22 @@
+# dosbox-opl3duo
+
+This fork of [dosbox] includes a new `oplemu`, `serial`, that sends all
+register writes over a Linux serial port. This is intended to be used with an
+Arduino running [opl3serial] attached to an [OPL3 Duo!] board.
+
+[dosbox]: https://www.dosbox.com/
+[opl3serial]: https://github.com/cknave/adplug-opl3duo
+[OPL3 Duo!]: https://cheerful.nl/OPL3Duo/index.html
+
+The following dosbox.conf settings are used in the `[sblaster]` section:
+
+| Setting       | Descirption                                    |
+|---------------|------------------------------------------------|
+| oplemu        | set to `serial` to use opl3serial              |
+| oplserialport | serial port device, defaults to `/dev/ttyACM0` |
+| oplserialbaud | serial baud rate, defaults to `1000000`        |
+
+```
 DOSBox v0.74-2 Manual (always use the latest version from www.dosbox.com)
 
 
@@ -1573,5 +1592,4 @@ See the THANKS file.
 See the site: 
 https://www.dosbox.com
 for an email address (The Crew-page).
-
-
+```
